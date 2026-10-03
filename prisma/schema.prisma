@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  ADMIN
+  EMPLOYEE
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+model Barber {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String   @db.VarChar(100)
+  email     String   @unique @db.VarChar(255)
+  password  String?  @db.VarChar(255)
+  role      Role     @default(EMPLOYEE)
+  
+  // Relações
+  availability  Availability[]
+  appointments  Appointment[]
+  
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @db.Timestamptz(6)
+}
+
+model Service {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String   @db.VarChar(100) // Ex: "Cabelo", "Barba"
+  price       Decimal  @db.Decimal(10, 2) // Usar Decimal para dinheiro
+  duration    Int      @default(30) // Duração em minutos
+  
+  appointments Appointment[]
+}
+
+model Appointment {
+  id              String            @id @default(uuid()) @db.Uuid
+  customerName    String            @db.VarChar(100) // Nome do cliente
+  customerPhone   String?           @db.VarChar(255)
+  date            DateTime          @db.Timestamptz(6) // Data e hora do corte
+  status          AppointmentStatus @default(PENDING)
+  isVip           Boolean           @default(false) 
+  totalAmount     Decimal           @db.Decimal(10, 2) // Valor cobrado (útil para o financeiro)
+  totalDuration  Int               @default(30)
+
+  // Chaves estrangeiras
+  barberId  String  @db.Uuid
+  barber    Barber  @relation(fields: [barberId], references: [id])
+  
+  services   Service[]
+
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @db.Timestamptz(6)
+}
+
+model Availability {
+  id        String   @id @default(uuid()) @db.Uuid
+  dayOfWeek Int      // 0 (Dom) a 6 (Sáb)
+  startTime String   // Ex: "09:00"
+  endTime   String   // Ex: "19:00"
+  isActive  Boolean  @default(true) 
+  
+  barberId  String   @db.Uuid
+  barber    Barber   @relation(fields: [barberId], references: [id], onDelete: Cascade)
+
+  @@unique([barberId, dayOfWeek]) // Um barbeiro só tem uma regra por dia da semana
+}
