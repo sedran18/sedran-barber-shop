@@ -1,10 +1,10 @@
+<!-- 
 
-
-# ✂️ SEDRAN Barber Shop
+# ✂️ Sedran Barber Shop
 
 Sistema Full Stack de alta performance para gestão de barbearias, focado em agendamentos dinâmicos e automação de pagamentos. O projeto utiliza uma arquitetura moderna de **Server Components** e **Server Actions**, garantindo segurança e velocidade no processamento de dados.
 
-🔗 **Link do Projeto:** [SEDRAN-barber-shop.vercel.app](https://SEDRAN-barber-shop.vercel.app/)
+🔗 **Link do Projeto:** [sedran-barber-shop.vercel.app](https://sedran-barber-shop.vercel.app/)
 
 ---
 
@@ -76,4 +76,4 @@ NEXT_PUBLIC_BASE_URL="https://seu-site.vercel.app"
 NEXT_PUBLIC_HAIRCUT_PRICE="40"
 NEXT_PUBLIC_BEARD_PRICE="25"
 NEXT_PUBLIC_EYEBROW_PRICE="15"
-```
+``` -->

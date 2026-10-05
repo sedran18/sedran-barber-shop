@@ -1,5 +1,5 @@
 {
-  "name": "SEDRAN_barber_shop",
+  "name": "sedran_barber_shop",
   "version": "1.0.0",
   "scripts": {
     "dev": "next dev",

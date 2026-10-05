@@ -90,7 +90,7 @@ const AddBarber = ({ isAdding, setIsAdding }: {
             </div>
             <div className="space-y-2 text-left">
               <label className="text-[10px] uppercase font-bold text-gray-400">E-mail de Acesso</label>
-              <Input name="email" type="email" required placeholder="exemplo@SEDRAN.com" className="bg-white/5 border-white/10 text-white h-12 focus:border-red-600 transition-colors" />
+              <Input name="email" type="email" required placeholder="exemplo@sedran.com" className="bg-white/5 border-white/10 text-white h-12 focus:border-red-600 transition-colors" />
             </div>
           </div>
 

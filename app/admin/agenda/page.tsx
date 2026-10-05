@@ -21,7 +21,7 @@ export default async function AgendaPage({
   const {date, status, view} = await searchParams;
 
   const barberId = session?.user.id ?? '';
-
+  console.log(barberId)
   let appointments = await getAppointments({date, barberId, status, view});
 
 

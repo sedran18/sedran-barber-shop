@@ -27,7 +27,6 @@ export const getAppointments = async ( {
     status: status === 'CANCELLED' ? 'CANCELLED' : { in: ['COMPLETED', 'CONFIRMED'] },
     barberId:  view === 'todos' ? undefined : barberId
   };
-
   
   if (date) {
     const [year, month, day] = date.split('-').map(Number);
@@ -69,6 +68,9 @@ export const getAppointments = async ( {
         date: 'asc',
       },
     });
+    console.log(barberId)
+    console.log(appointments[0].id)
+    console.log(appointments[0].barber.name)
     return appointments;
   } catch (error) {
     console.error("ERRO_GET_APPOINTMENTS:", error);

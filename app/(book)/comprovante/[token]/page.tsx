@@ -57,7 +57,7 @@ export default async function ComprovantePage({ params }: PageProps) {
             </div>
             <div>
                 <h1 className="font-black text-xl uppercase tracking-tighter italic">Agendamento Confirmado</h1>
-                <p className="text-white/70 text-[10px] uppercase tracking-widest font-bold">SEDRAN Barber Shop</p>
+                <p className="text-white/70 text-[10px] uppercase tracking-widest font-bold">Sedran Barber Shop</p>
             </div>
         </div>
 
@@ -98,8 +98,8 @@ export default async function ComprovantePage({ params }: PageProps) {
                         <User size={14} />
                         <span className="text-[9px] uppercase font-black tracking-widest">Barbeiro</span>
                     </div>
-                    <p className="text-sm font-bold text-gray-200 tracking-tight">{appointment.barber?.name || "SEDRAN"}</p>
-                </div>
+                    <p className="text-sm font-bold text-gray-200 tracking-tight">{appointment.barber?.name || ""}</p>
+                </div>  
 
                 <div className="space-y-1 text-right">
                     <div className="flex items-center gap-2 text-red-600 justify-end">

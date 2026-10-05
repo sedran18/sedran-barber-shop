@@ -136,8 +136,8 @@ const LoginForm = () => {
 
         {/* Footer */}
         <p className="mt-8 text-center text-gray-600 text-[10px] uppercase tracking-widest leading-loose">
-          Desenvolvido por <span className="text-white font-bold">SEDRAN</span> <br />
-          © 2026 SEDRAN Barber Shop • Todos os direitos reservados.
+          Desenvolvido por <span className="text-white font-bold">Sedran</span> <br />
+          © 2026 Sedran Barber Shop • Todos os direitos reservados.
         </p>
       </div>
     </div>

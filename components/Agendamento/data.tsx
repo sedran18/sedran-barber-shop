@@ -48,7 +48,7 @@ const Data = ({ setSelectedDate, selectedDate }: {
                     <DialogTitle className="text-xs font-black uppercase tracking-[0.3em] text-red-600">
                         Calendário
                     </DialogTitle>
-                    <p className="text-[10px] text-gray-500 uppercase tracking-widest font-bold">SEDRAN Barber Shop</p>
+                    <p className="text-[10px] text-gray-500 uppercase tracking-widest font-bold">Sedran Barber Shop</p>
                 </DialogHeader>
 
                 <div className="flex justify-center">

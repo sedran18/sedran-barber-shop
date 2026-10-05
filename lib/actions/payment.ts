@@ -76,11 +76,11 @@ export async function handleBooking(data: Pick<AgendamentoForm, 'customerName' |
     const paymentResponse = await payment.create({
       body: {
         transaction_amount: valorTotal,
-        description: `Agendamento - SEDRAN Barber Shop`,
+        description: `Agendamento - Sedran Barber Shop`,
         payment_method_id: "pix",
         external_reference: appointmentRes.appointmentId,
         payer: {
-          email: `cliente_${appointmentRes.appointmentId}@SEDRANbarber.com.br`,
+          email: `cliente_${appointmentRes.appointmentId}@sedranbarber.com.br`,
           first_name: data.customerName.split(' ')[0],
           last_name: data.customerName.split(' ').slice(1).join(' ') || 'Cliente',
         },

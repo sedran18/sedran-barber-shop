@@ -52,7 +52,7 @@ export function PixModal({ isOpen, onClose, qrCode, qrCodeBase64, appointmentId,
       <DialogContent className="sm:max-w-md bg-[#0a0a0a] border-white/5 text-white rounded-[2.5rem] outline-none">
         <DialogHeader className="pt-4">
           <DialogTitle className="text-2xl font-black uppercase italic tracking-tighter text-center">Pagamento via Pix</DialogTitle>
-          <DialogDescription className="text-center text-gray-500 text-[10px] uppercase tracking-[0.2em] font-bold">SEDRAN Barber Shop</DialogDescription>
+          <DialogDescription className="text-center text-gray-500 text-[10px] uppercase tracking-[0.2em] font-bold">Sedran Barber Shop</DialogDescription>
         </DialogHeader>
 
         <div className="flex flex-col items-center justify-center p-4 space-y-6">

@@ -15,7 +15,7 @@ const About = () => {
             SALÃO DE QUALIDADE
           </h2>
           <h3 className="text-red-600 font-bold tracking-[0.3em] text-sm -mt-6 md:-mt-10 md:ml-2 uppercase">
-            A Experiência SEDRAN
+            A Experiência Sedran
           </h3>
         </div>
 
