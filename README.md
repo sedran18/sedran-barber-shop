@@ -61,12 +61,25 @@ Dashboard administrativo
 
 ### Agendamentos
 
+O sistema suporta dois fluxos de agendamento:
+
+**Agendamento pelo cliente**
+
 * Seleção de serviços.
 * Seleção de horários disponíveis.
 * Validação de disponibilidade.
-* Criação de agendamentos.
-* Controle do status do agendamento.
-* Prevenção de conflitos de horário.
+* Criação do agendamento.
+* Pagamento via Pix.
+* Confirmação automática após processamento do pagamento.
+
+**Agendamento pelo barbeiro**
+
+O barbeiro também pode registrar um agendamento diretamente pelo dashboard administrativo, permitindo atender clientes que estejam presencialmente na barbearia ou que não tenham acesso à internet.
+
+Nesse fluxo, o agendamento é criado diretamente pelo barbeiro e **não passa pelo pagamento via Pix**, permitindo registrar atendimentos presenciais ou outras situações em que o pagamento online não seja necessário.
+
+Ambos os fluxos utilizam as mesmas regras de disponibilidade, evitando conflitos de horário.
+
 
 ### Pagamentos
 
