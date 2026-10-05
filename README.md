@@ -1,79 +1,236 @@
-<!-- 
+# Sedran Barber Shop
 
-# ✂️ Sedran Barber Shop
+**MVP full stack para gerenciamento de barbearias**, desenvolvido como projeto de portfólio com foco em **agendamentos, pagamentos online e gestão administrativa**.
 
-Sistema Full Stack de alta performance para gestão de barbearias, focado em agendamentos dinâmicos e automação de pagamentos. O projeto utiliza uma arquitetura moderna de **Server Components** e **Server Actions**, garantindo segurança e velocidade no processamento de dados.
+O projeto simula a operação digital de uma barbearia, conectando o fluxo do cliente ao gerenciamento interno da operação, incluindo **agendamento, pagamento via Pix, confirmação por webhook e dashboard administrativo**.
 
-🔗 **Link do Projeto:** [sedran-barber-shop.vercel.app](https://sedran-barber-shop.vercel.app/)
+> **Status:** MVP funcional desenvolvido para portfólio.
+
+### Demonstração online
+
+**[Acessar o Sedran Barber Shop](https://sedran-barber-shop.vercel.app/)**
 
 ---
 
-## 🚀 Funcionalidades Principais
+## Preview
 
-- **Agendamento em Tempo Real:** Fluxo intuitivo para seleção de serviços (Cabelo, Barba, Sobrancelha) com validação de horários.
-    
-- **Integração com Mercado Pago:** Checkout transparente para pagamentos via Pix.
-    
-- **Webhooks de Pagamento:** Sistema de escuta ativa que atualiza o status do agendamento no banco de dados automaticamente após a confirmação do pagamento.
-    
-- **Dashboard Administrativo:** Painel restrito para o barbeiro com métricas de faturamento, ticket médio e controle de agenda.
-    
-- **Gestão Dinâmica via Environment:** Preços, nomes e descrições configuráveis via variáveis de ambiente, facilitando a manutenção e escalabilidade.
-    
+![Sedran Barber Shop — Preview](./public/readme/home.png)
 
-## 🛠️ Stack Tecnológica
+---
 
-- **Frontend:** Next.js 14 (App Router), Tailwind CSS, Shadcn/UI.
-    
-- **Backend:** Next.js Server Actions (eliminando a necessidade de APIs REST tradicionais em fluxos internos).
-    
-- **Banco de Dados:** PostgreSQL hospedado no **Supabase**.
-    
-- **ORM:** Prisma com suporte a **Connection Pooling** (essencial para ambientes Serverless).
-    
-- **Pagamentos:** Mercado Pago SDK & Webhooks.
-    
-- **Segurança:** Auth.js para autenticação e criptografia de dados sensíveis.
-    
+##  Fluxo da aplicação
 
-## 📂 Arquitetura e Organização
+![Fluxo do Sedran Barber Shop](./public/readme/fluxo1.gif)
 
-O projeto segue uma estrutura modular para facilitar a manutenção:
+O MVP implementa o seguinte fluxo principal:
 
-Plaintext
-
+```text
+Cliente
+   │
+   ▼
+Escolha do serviço
+   │
+   ▼
+Seleção do horário
+   │
+   ▼
+Criação do agendamento
+   │
+   ▼
+Pagamento via Pix
+   │
+   ▼
+Mercado Pago
+   │
+   ▼
+Webhook
+   │
+   ▼
+Confirmação do pagamento
+   │
+   ▼
+Atualização do agendamento
+   │
+   ▼
+Dashboard administrativo
 ```
-├── app/              # Rotas, Layouts e Server Components
-├── lib/actions/      # Server Actions (Lógica de mutação de dados)
-├── components/       # Componentes reutilizáveis 
-├── lib/constants/    # Configurações e constantes do sistema
-├── lib/              # Configurações do Prisma, Auth e Utilitários
-├── prisma/           # Schema do banco de dados e Migrations
-└── public/           # Ativos estáticos (Logos e Ícones)
-```
 
-## ⚙️ Configuração do Ambiente (`.env`)
+---
 
-O sistema é altamente configurável. Abaixo as variáveis necessárias:
+## Funcionalidades
 
+### Agendamentos
 
-```
-# Banco de Dados (Supabase + Pooling)
-DATABASE_URL="postgres://..." # Transaction mode para a App
-DIRECT_URL="postgres://..."   # Session mode para Migrations
+* Seleção de serviços.
+* Seleção de horários disponíveis.
+* Validação de disponibilidade.
+* Criação de agendamentos.
+* Controle do status do agendamento.
+* Prevenção de conflitos de horário.
 
-# Admin & Segurança
-AUTH_SECRET="sua_chave_secreta"
-NAME_ADMIN="Admin"
-EMAIL_ADMIN="admin@email.com"
-PASSWORD_ADMIN="sua_senha"
+### Pagamentos
 
-# Integrações
-MERCADO_PAGO_ACCESS_TOKEN="seu_token_mp"
-NEXT_PUBLIC_BASE_URL="https://seu-site.vercel.app"
+Integração com o **Mercado Pago** para processamento de pagamentos via Pix.
 
-# Preços Dinâmicos
-NEXT_PUBLIC_HAIRCUT_PRICE="40"
-NEXT_PUBLIC_BEARD_PRICE="25"
-NEXT_PUBLIC_EYEBROW_PRICE="15"
-``` -->
+O fluxo utiliza:
+
+* Criação do checkout.
+* Pagamento via Pix.
+* Recebimento de notificações.
+* Processamento de webhooks.
+* Atualização automática do status do agendamento.
+
+A confirmação não depende do cliente permanecer na página após realizar o pagamento. O sistema utiliza o webhook enviado pelo provedor para processar a confirmação da transação.
+
+![Sedran Barber Shop — Preview](./public/readme/comprovante.png)
+
+### Dashboard administrativo
+
+Área protegida para gerenciamento da operação da barbearia.
+
+Inclui:
+
+* Visualização da agenda.
+* Acompanhamento dos agendamentos.
+* Métricas de faturamento.
+* Ticket médio.
+* Controle dos pagamentos.
+
+![Sedran Barber Shop — Preview](./public/readme/admin.png)
+
+---
+
+## Arquitetura
+
+A aplicação utiliza o **Next.js App Router**, distribuindo responsabilidades entre interface, regras de negócio, persistência de dados e integrações externas.
+
+### Server Components
+
+Server Components são utilizados nas partes da aplicação que não precisam de interatividade no navegador.
+
+Isso permite executar a obtenção de dados no servidor e reduzir a quantidade de JavaScript enviada ao cliente.
+
+### Server Actions
+
+As principais mutações internas utilizam Server Actions, evitando a necessidade de criar endpoints REST para operações que não precisam ser expostas como uma API pública.
+
+### Webhooks
+
+O processamento dos pagamentos utiliza webhooks do Mercado Pago.
+
+Esse modelo permite que a confirmação da transação seja processada de forma independente do estado da página do cliente.
+
+---
+
+##  Stack
+
+| Categoria      | Tecnologia                       |
+| -------------- | -------------------------------- |
+| Framework      | Next.js 14                       |
+| Linguagem      | TypeScript                       |
+| Interface      | React + Tailwind CSS + shadcn/ui |
+| Backend        | Next.js Server Actions           |
+| Banco de dados | PostgreSQL                       |
+| ORM            | Prisma                           |
+| Infraestrutura | Supabase                         |
+| Autenticação   | Auth.js                          |
+| Pagamentos     | Mercado Pago                     |
+| Deploy         | Vercel                           |
+
+---
+
+## Persistência de dados
+
+O projeto utiliza **PostgreSQL** com **Prisma ORM**.
+
+O banco foi modelado para representar as principais entidades e relações do domínio da barbearia, mantendo integridade relacional e acesso tipado aos dados através do Prisma.
+
+Para o ambiente serverless utilizado no deploy, a aplicação utiliza **connection pooling**, reduzindo problemas relacionados à abertura excessiva de conexões com o banco.
+
+---
+
+## Autenticação e segurança
+
+A área administrativa possui autenticação e controle de acesso.
+
+Entre as medidas utilizadas:
+
+* Auth.js para autenticação.
+* Proteção das áreas administrativas.
+* Operações sensíveis executadas no servidor.
+* Senhas armazenadas de forma segura.
+* Validação dos dados antes das mutações.
+* Credenciais e tokens armazenados em variáveis de ambiente.
+* Segredos de produção fora do código-fonte.
+
+---
+
+## Principais decisões técnicas
+
+### Server Components + Server Actions
+
+A aplicação aproveita os recursos do Next.js para executar lógica no servidor e reduzir a necessidade de uma API REST tradicional para operações internas.
+
+### PostgreSQL + Prisma
+
+O domínio possui relacionamentos entre diferentes entidades, tornando o modelo relacional adequado para garantir consistência dos dados.
+
+O Prisma adiciona tipagem ao acesso ao banco e facilita a manutenção do schema.
+
+### Mercado Pago + Webhooks
+
+O pagamento possui comportamento assíncrono.
+
+Por isso, a aplicação não considera a resposta inicial do checkout como única fonte de verdade. A confirmação da transação é processada através do webhook enviado pelo provedor de pagamento.
+
+---
+
+## O que este projeto demonstra
+
+O projeto foi desenvolvido para aprofundar conhecimentos práticos em:
+
+* Desenvolvimento full stack.
+* Next.js App Router.
+* Server Components.
+* Server Actions.
+* TypeScript.
+* Modelagem de bancos relacionais.
+* Prisma ORM.
+* PostgreSQL.
+* Autenticação.
+* Integração com APIs externas.
+* Webhooks.
+* Processamento de pagamentos.
+* Arquitetura serverless.
+* Deploy e configuração de produção.
+
+---
+
+## Possíveis evoluções
+
+Como MVP, o projeto pode evoluir futuramente com funcionalidades como:
+
+* Gestão de múltiplos barbeiros.
+* Cancelamento e reagendamento.
+* Histórico de clientes.
+* Notificações automáticas.
+* Relatórios financeiros avançados.
+* Gestão de serviços pelo dashboard.
+* Métricas de desempenho por período.
+* Outros meios de pagamento.
+
+---
+
+## Autor
+
+Desenvolvido por **Gabriel Nardes (Sedran)** como projeto de portfólio para demonstrar conhecimentos em desenvolvimento full stack e construção de aplicações web orientadas a regras de negócio.
+
+### Tecnologias
+
+`Next.js` · `TypeScript` · `React` · `PostgreSQL` · `Prisma` · `Supabase` · `Auth.js` · `Mercado Pago` · `Tailwind CSS`
+
+---
+
+### Demonstração
+
+**[Acessar o Sedran Barber Shop](https://sedran-barber-shop.vercel.app/)**
